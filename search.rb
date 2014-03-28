@@ -18,14 +18,14 @@ unless File.executable?(sqlite3)
   exit 0
 end
 
-all = `#{sqlite3} "#{db}" "SELECT ZNAME,ZFULL_NAME,ZHTML_URL,ZREPODESCRIPTION FROM ZOMSREPO"`.split(/\n/)
+all = `#{sqlite3} "#{db}" "SELECT ZFULL_NAME,ZHTML_URL,ZREPODESCRIPTION FROM ZOMSREPO"`.split(/\n/)
 
 all.map! {|item| item.split('|', 4) }
 
 feedback = Feedback.new
 
-all.each do |name, fullname, url, desc|
-  if queries.all? {|query| [name, desc].any? {|str| str.downcase.include?(query.downcase) } }
+all.each do |fullname, url, desc|
+  if queries.all? {|query| [fullname, desc].any? {|str| str.downcase.include?(query.downcase) } }
     feedback.add_item({:title => fullname, :subtitle => desc, :arg => url})
   end
 end
