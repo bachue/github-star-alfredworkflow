@@ -1,4 +1,5 @@
-github-star-alfredworkflow
-==========================
+# Github Star.alfredworkflow
 
-An Alfred Workflow to query in all Github repositories you starred, depends on OhMyStar
+!()[http://www.alfredapp.com/images/logo.png]
+
+Depends on [OhMyStar](http://www.ohmystarapp.com/), Search in all your Github repositories you starred.
