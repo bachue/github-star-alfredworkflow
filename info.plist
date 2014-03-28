@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
+				<string>03ACEE2F-D863-427D-A294-68B9E202F245</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -30,23 +30,6 @@
 	<string>Github Star</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>63</integer>
-				<key>script</key>
-				<string>open "{query}"</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -83,12 +66,29 @@ unset IFS</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>03ACEE2F-D863-427D-A294-68B9E202F245</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
+		<key>03ACEE2F-D863-427D-A294-68B9E202F245</key>
 		<dict>
 			<key>ypos</key>
 			<real>60</real>
