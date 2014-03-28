@@ -19,6 +19,8 @@ unless File.executable?(sqlite3)
 end
 
 all = `#{sqlite3} "#{db}" "SELECT ZFULL_NAME,ZHTML_URL,ZREPODESCRIPTION FROM ZOMSREPO"`.split(/\n/)
+# TODO: Use SQL to query keywords
+# TODO: apply popen3
 
 all.map! {|item| item.split('|', 4) }
 
