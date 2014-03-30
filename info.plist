@@ -40,9 +40,7 @@
 				<key>keyword</key>
 				<string>githubstar</string>
 				<key>script</key>
-				<string>echo "{query}" &gt;&gt; /tmp/1.log
-
-output=`/usr/bin/ruby -KU search.rb {query}`
+				<string>output=`/usr/bin/ruby -KU search.rb {query}`
 
 IFS=$'\n'
 for line in $output

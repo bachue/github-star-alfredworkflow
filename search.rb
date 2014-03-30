@@ -4,6 +4,8 @@ queries = ARGV
 
 return if queries.empty?
 
+require 'open3'
+
 db = "#{ENV['HOME']}/Library/Containers/com.iiiyu.ohmystar/Data/Library/Application Support/OhMyStar/OhMyStar.sqlite"
 
 unless File.readable?(db)
@@ -18,18 +20,22 @@ unless File.executable?(sqlite3)
   exit 0
 end
 
-all = `#{sqlite3} "#{db}" "SELECT ZFULL_NAME,ZHTML_URL,ZREPODESCRIPTION FROM ZOMSREPO"`.split(/\n/)
-# TODO: Use SQL to query keywords
-# TODO: apply popen3
+related_fields = %w(ZFULL_NAME ZHTML_URL ZREPODESCRIPTION)
+conditions = queries.map {|query|
+  related_fields.map {|field|
+    "#{field} like #{ "%#{query.gsub('%', '_')}%".inspect }"
+  }.join(' OR ')
+}.map {|query| "(#{query})" }.join(' AND ')
 
-all.map! {|item| item.split('|', 4) }
+statement = "PRAGMA case_sensitive_like=OFF; SELECT ZFULL_NAME,ZHTML_URL,ZREPODESCRIPTION FROM ZOMSREPO WHERE #{conditions}"
 
 feedback = Feedback.new
+Open3.popen3(sqlite3, db, statement) do |stdin, stdout, stderr, thread|
+  stdin.close
 
-all.each do |fullname, url, desc|
-  if queries.all? {|query| [fullname, desc].any? {|str| str.downcase.include?(query.downcase) } }
+  until stdout.eof?
+    fullname, url, desc = stdout.gets.split('|', 3)
     feedback.add_item({:title => fullname, :subtitle => desc, :arg => url})
   end
 end
-
 puts feedback.to_xml
